@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduSphere — Student Academic & STEM Portal</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    (function(){
+      const t = localStorage.getItem("cp_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+  <!-- ╔══════════════════ NAVBAR ══════════════════╗ -->
+  <nav class="navbar" id="navbar">
+    <button class="nav-hamburger" id="hamburger" aria-label="Menu">
+      <i class="fa-solid fa-bars"></i>
+    </button>
+
+    <div class="nav-brand" id="brandLogo" title="EduSphere Student Portal">
+      <i class="fa-solid fa-graduation-cap"></i>
+      <span>EduSphere <small class="brand-sub">STEM Portal</small></span>
+    </div>
+
+    <div class="nav-search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="searchInput" placeholder="Search course modules, topics, or code (e.g. PHYS-101)..." autocomplete="off" />
+    </div>
+
+    <div class="nav-actions">
+      <button id="randomGame" class="btn btn-ghost" title="Launch random curriculum module">
+        <i class="fa-solid fa-dice"></i>
+        <span class="btn-label">Random Module</span>
+      </button>
+      <a href="proxy.html" class="btn btn-ghost" title="Academic reference & research browser">
+        <i class="fa-solid fa-globe"></i>
+        <span class="btn-label">Research Browser</span>
+      </a>
+      <button id="themeToggle" class="btn btn-icon" title="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <!-- DISCREET PANIC BUTTON — looks like a standard logout icon -->
+      <button id="panicBtn" class="btn btn-icon panic-btn" title="Leave Session (Escape)">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
+    </div>
+  </nav>
+
+  <!-- ╔══════════════════ SIDEBAR ══════════════════╗ -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-section-label">Academic Portal</div>
+    <ul class="sidebar-nav">
+      <li class="active" data-page="home"><i class="fa-solid fa-book-bookmark"></i> All Curriculum</li>
+      <li data-page="favorites"><i class="fa-solid fa-star"></i> Pinned Modules</li>
+      <li data-page="recent"><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity</li>
+    </ul>
+
+    <div class="sidebar-section-label">Categories</div>
+    <ul class="sidebar-nav cat-nav">
+      <li data-category="all" class="active-cat"><i class="fa-solid fa-layer-group"></i> All Games</li>
+      <li data-category="sports"><i class="fa-solid fa-football"></i> Sports</li>
+      <li data-category="action"><i class="fa-solid fa-burst"></i> Action</li>
+      <li data-category="driving"><i class="fa-solid fa-car"></i> Driving</li>
+      <li data-category="puzzle"><i class="fa-solid fa-puzzle-piece"></i> Puzzle</li>
+      <li data-category="multiplayer"><i class="fa-solid fa-earth-americas"></i> .IO Games</li>
+      <li data-category="casual"><i class="fa-solid fa-dice"></i> Casual</li>
+    </ul>
+
+    <div class="sidebar-section-label">Resources</div>
+    <ul class="sidebar-nav">
+      <li data-page="about"><i class="fa-solid fa-circle-info"></i> About & FAQ</li>
+    </ul>
+
+    <!-- Tab Cloak / Disguise panel -->
+    <div class="cloak-panel">
+      <div class="sidebar-section-label">Tab Title Disguise</div>
+      <div class="cloak-options">
+        <button class="cloak-opt active" data-title="EduSphere — Student Academic & STEM Portal" data-icon="🎓">
+          <span>🎓</span> EduSphere (Default)
+        </button>
+        <button class="cloak-opt" data-title="Classes — Google Classroom" data-icon="📗">
+          <span>📗</span> Google Classroom
+        </button>
+        <button class="cloak-opt" data-title="Unit 4 Assignment — Google Docs" data-icon="📄">
+          <span>📄</span> Google Docs
+        </button>
+        <button class="cloak-opt" data-title="Dashboard | Khan Academy" data-icon="🟢">
+          <span>🟢</span> Khan Academy
+        </button>
+        <button class="cloak-opt" data-title="Dashboard — Canvas LMS" data-icon="🖼️">
+          <span>🖼️</span> Canvas LMS
+        </button>
+      </div>
+      <div class="panic-url-row">
+        <label>Quick Exit URL (Esc)</label>
+        <input type="text" id="panicUrlInput" placeholder="https://classroom.google.com" />
+      </div>
+    </div>
+  </aside>
+
+  <!-- ╔══════════════════ MAIN CONTENT ══════════════════╗ -->
+  <main class="main-content" id="mainContent">
+
+    <!-- HOME / CURRICULUM PAGE -->
+    <section id="page-home" class="page active">
+      <div class="hero">
+        <div class="hero-text">
+          <div class="hero-badge"><i class="fa-solid fa-shield-halved"></i> Unblocked Student Portal</div>
+          <h1>Unblocked Games & Interactive Hub</h1>
+          <p>Play popular games directly in your browser without downloads or logins, complete with school tab disguises and quick escape key.</p>
+        </div>
+        <div class="hero-actions">
+          <button id="heroRandom" class="btn btn-primary">
+            <i class="fa-solid fa-dice"></i> Play Random Game
+          </button>
+          <a href="proxy.html" class="btn btn-secondary">
+            <i class="fa-solid fa-globe"></i> Research Browser
+          </a>
+        </div>
+      </div>
+
+      <div class="section-header">
+        <h2 id="sectionTitle">All Games</h2>
+        <span id="gameCountBadge" class="section-count"></span>
+        <div class="filter-tags" id="filterTags"></div>
+      </div>
+
+      <div class="game-grid" id="gameGrid"></div>
+    </section>
+
+    <!-- PINNED MODULES / FAVORITES -->
+    <section id="page-favorites" class="page">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-star"></i> Pinned Course Modules</h2>
+      </div>
+      <div class="game-grid" id="favGrid">
+        <div class="empty-state">
+          <i class="fa-solid fa-bookmark"></i>
+          <p>No pinned modules yet — click the <i class="fa-regular fa-star"></i> icon on any lesson card to pin it for quick access.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- RECENT ACTIVITY -->
+    <section id="page-recent" class="page">
+      <div class="section-header">
+        <h2><i class="fa-solid fa-clock-rotate-left"></i> Recent Activity Log</h2>
+      </div>
+      <div class="game-grid" id="recentGrid">
+        <div class="empty-state">
+          <i class="fa-solid fa-laptop-code"></i>
+          <p>No modules completed yet. Select any module from the curriculum to begin.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SYLLABUS & FAQ -->
+    <section id="page-about" class="page">
+      <div class="about-container">
+        <h2><i class="fa-solid fa-graduation-cap"></i> EduSphere Academic Overview</h2>
+        <p>EduSphere provides interactive digital STEM assignments and cognitive development simulations for students across applied mathematics, physics, logic, and problem-solving disciplines.</p>
+
+        <h3><i class="fa-solid fa-microscope"></i> Learning Objectives</h3>
+        <p>Each module features measurable educational metrics including reaction threshold speed, dimensional coordinate navigation, spatial geometric deduction, and systems modeling.</p>
+
+        <h3><i class="fa-solid fa-shield-halved"></i> Academic Research Browser</h3>
+        <p>The built-in <strong>Research Browser</strong> enables students to cross-reference educational materials, scientific documentation, and reference libraries seamlessly.</p>
+
+        <h3><i class="fa-solid fa-circle-question"></i> Frequently Asked Questions</h3>
+        <details>
+          <summary>Are these modules free to access?</summary>
+          <p>Yes. All interactive labs run fully within the browser with no user licensing fees, downloads, or software installations.</p>
+        </details>
+        <details>
+          <summary>How does the Tab Disguise setting work?</summary>
+          <p>The Tab Disguise selector updates your browser tab's title and icon to standard academic software (such as Google Classroom or Canvas) for a uniform classroom screen profile.</p>
+        </details>
+        <details>
+          <summary>What does the Quick Exit key do?</summary>
+          <p>Pressing the <kbd>Escape</kbd> key or clicking the exit button immediately navigates your active tab to Google Classroom (or your designated educational landing page).</p>
+        </details>
+        <details>
+          <summary>Which systems are supported?</summary>
+          <p>EduSphere is designed for ChromeOS Chromebooks, Windows, macOS, and Linux on all modern web browsers.</p>
+        </details>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ╔══════════════════ MODULE INTERACTIVE MODAL ══════════════════╗ -->
+  <div id="gameModal" class="modal hidden">
+    <div class="modal-overlay" id="modalOverlay"></div>
+    <div class="modal-box">
+      <div class="modal-header">
+        <div class="modal-header-info">
+          <span class="modal-course-badge" id="modalCourseBadge">MODULE</span>
+          <span id="modalTitle">Educational Interactive Lab</span>
+        </div>
+        <div class="modal-controls">
+          <button id="modalFav" title="Pin module"><i class="fa-regular fa-star"></i></button>
+          <button id="modalNewTab" title="Open in new window"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+          <button id="modalFullscreen" title="Toggle Fullscreen"><i class="fa-solid fa-expand"></i></button>
+          <button id="modalClose" title="Close Module"><i class="fa-solid fa-xmark"></i></button>
+        </div>
+      </div>
+      <div class="modal-body">
+        <div class="iframe-loader" id="iframeLoader">
+          <div class="spinner"></div>
+          <p id="loaderMsg">Initializing STEM Interactive Simulation…</p>
+        </div>
+        <div class="iframe-error hidden" id="iframeError">
+          <i class="fa-solid fa-triangle-exclamation"></i>
+          <p>Module connection timed out.<br>Retrying via academic proxy relay…</p>
+          <div class="spinner" style="margin-top:.75rem"></div>
+        </div>
+        <iframe
+          id="gameFrame"
+          referrerpolicy="no-referrer"
+          allowfullscreen="true"
+          webkitallowfullscreen="true"
+          mozallowfullscreen="true"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share; fullscreen; gamepad; pointer-lock"
+          sandbox="allow-scripts allow-same-origin allow-forms allow-pointer-lock allow-popups allow-modals allow-top-navigation-by-user-activation"
+        ></iframe>
+      </div>
+    </div>
+  </div>
+
+  <!-- TOAST CONTAINER -->
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script>
+    // Ensure all stale service workers are cleared for instant live updates
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker.getRegistrations().then(function(registrations) {
+        for (let registration of registrations) {
+          registration.unregister();
+        }
+      });
+      if ("caches" in window) {
+        caches.keys().then(function(keys) {
+          keys.forEach(function(k) { caches.delete(k); });
+        });
+      }
+    }
+  </script>
+  <script src="js/games.js?v=13"></script>
+  <script src="js/app.js?v=13"></script>
+</body>
+</html>

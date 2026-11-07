@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EduSphere — Academic Research Browser</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+  <script>
+    (function(){
+      const t = localStorage.getItem("cp_theme") || "dark";
+      document.documentElement.setAttribute("data-theme", t);
+    })();
+  </script>
+</head>
+<body>
+  <nav class="navbar">
+    <div class="nav-brand">
+      <a href="index.html" style="color:inherit;text-decoration:none;display:flex;align-items:center;gap:.5rem;">
+        <i class="fa-solid fa-graduation-cap"></i>
+        <span>EduSphere <small class="brand-sub">Research Browser</small></span>
+      </a>
+    </div>
+
+    <div class="nav-search proxy-bar">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input type="text" id="proxyInput" placeholder="Enter academic URL or research query..." autocomplete="off" />
+      <button id="proxyGo" class="btn btn-primary">Search <i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="nav-actions">
+      <a href="index.html" class="btn btn-ghost">
+        <i class="fa-solid fa-book-bookmark"></i>
+        <span class="btn-label">Curriculum</span>
+      </a>
+      <button id="themeToggle" class="btn btn-icon" title="Toggle theme">
+        <i class="fa-solid fa-moon"></i>
+      </button>
+      <button id="panicBtn" class="btn btn-icon panic-btn" title="Leave Session (Escape)">
+        <i class="fa-solid fa-arrow-right-from-bracket"></i>
+      </button>
+    </div>
+  </nav>
+
+  <main class="proxy-main">
+    <!-- HERO SEARCH -->
+    <div class="proxy-hero" id="proxyHero">
+      <div class="proxy-hero-inner">
+        <i class="fa-solid fa-book-open-reader fa-3x"></i>
+        <h1>Academic Research Browser</h1>
+        <p>Access educational encyclopedias, online archives, and research databases across network environments.</p>
+        <div class="proxy-input-group">
+          <input type="text" id="proxyInputBig" placeholder="https://example.com or topic..." autocomplete="off" />
+          <button id="proxyGoBig" class="btn btn-primary btn-lg">
+            <i class="fa-solid fa-magnifying-glass"></i> Browse
+          </button>
+        </div>
+        <div class="proxy-quicklinks">
+          <span>Quick References:</span>
+          <button class="quicklink" data-url="https://classroom.google.com">Google Classroom</button>
+          <button class="quicklink" data-url="https://www.khanacademy.org">Khan Academy</button>
+          <button class="quicklink" data-url="https://en.wikipedia.org">Wikipedia</button>
+          <button class="quicklink" data-url="https://www.youtube.com">YouTube</button>
+          <button class="quicklink" data-url="https://www.reddit.com">Reddit</button>
+          <button class="quicklink" data-url="https://discord.com/app">Discord</button>
+          <button class="quicklink" data-url="https://www.twitch.tv">Twitch</button>
+        </div>
+        <p class="proxy-note">
+          <i class="fa-solid fa-circle-check"></i>
+          Encrypted relay protocol active.
+        </p>
+      </div>
+    </div>
+
+    <!-- FRAME AREA -->
+    <div class="proxy-frame-container hidden" id="proxyFrameContainer">
+      <div class="proxy-toolbar">
+        <button id="proxyBack" title="Back"><i class="fa-solid fa-arrow-left"></i></button>
+        <button id="proxyForward" title="Forward"><i class="fa-solid fa-arrow-right"></i></button>
+        <button id="proxyRefresh" title="Refresh"><i class="fa-solid fa-rotate-right"></i></button>
+        <div class="proxy-url-display">
+          <i class="fa-solid fa-lock"></i>
+          <span id="proxyCurrentUrl">—</span>
+        </div>
+        <button id="proxyHome" title="Home"><i class="fa-solid fa-house"></i></button>
+        <button id="proxyFullscreen" title="Fullscreen"><i class="fa-solid fa-expand"></i></button>
+        <button id="proxyNewTab" title="Open in new window"><i class="fa-solid fa-arrow-up-right-from-square"></i></button>
+      </div>
+      <iframe id="proxyFrame"
+        sandbox="allow-scripts allow-same-origin allow-forms allow-popups allow-popups-to-escape-sandbox"
+        allowfullscreen></iframe>
+    </div>
+  </main>
+
+  <div id="toastContainer" class="toast-container"></div>
+
+  <script src="js/proxy.js"></script>
+  <script src="js/theme.js"></script>
+  <script>
+    const panicBtn = document.getElementById("panicBtn");
+    if (panicBtn) {
+      panicBtn.addEventListener("click", () => {
+        window.location.href = localStorage.getItem("cp_panic_url") || "https://classroom.google.com";
+      });
+    }
+    document.addEventListener("keydown", (e) => {
+      if (e.key === "Escape") {
+        window.location.href = localStorage.getItem("cp_panic_url") || "https://classroom.google.com";
+      }
+    });
+  </script>
+</body>
+</html>
