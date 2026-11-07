@@ -470,8 +470,14 @@ img    { max-width: 100%; display: block; }
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 2.6rem;
-  transition: opacity .25s;
+  font-size: 3.2rem;
+  transition: transform .25s ease, filter .25s ease;
+  box-shadow: inset 0 0 35px rgba(0,0,0,0.5);
+  text-shadow: 0 4px 15px rgba(0,0,0,0.6);
+}
+.game-card:hover .game-card-thumb-bg {
+  transform: scale(1.12);
+  filter: brightness(1.15);
 }
 .game-card-thumb img {
   position: absolute;
@@ -1769,7 +1775,7 @@ const GAMES = [
     "title": "3 Slices",
     "category": "puzzle",
     "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "color": "#6366f1",
     "url": "https://staticquasar931.github.io/3-Slices/"
   },
   {
@@ -1777,7 +1783,7 @@ const GAMES = [
     "title": "3 Slices 2",
     "category": "puzzle",
     "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "color": "#6366f1",
     "url": "https://staticquasar931.github.io/3-Slices-2/"
   },
   {
@@ -1785,7 +1791,7 @@ const GAMES = [
     "title": "3 Slices Staticquasar931",
     "category": "puzzle",
     "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "color": "#6366f1",
     "url": "https://staticquasar931.github.io/3-Slices-StaticQuasar931/"
   },
   {
@@ -1800,8 +1806,8 @@ const GAMES = [
     "id": "adventure-capitalist",
     "title": "Adventure Capitalist",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udcb5",
+    "color": "#15803d",
     "url": "https://staticquasar931.github.io/AdVenture-Capitalist/"
   },
   {
@@ -1821,14 +1827,6 @@ const GAMES = [
     "url": "https://staticquasar931.github.io/ARC/"
   },
   {
-    "id": "arrow-hero-old",
-    "title": "Arrow Hero Old",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/arrow-hero-old/"
-  },
-  {
     "id": "backflip-dive-3d",
     "title": "Backflip Dive 3d",
     "category": "casual",
@@ -1840,7 +1838,7 @@ const GAMES = [
     "id": "baldisbasics",
     "title": "Baldisbasics",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/BaldisBasics/"
   },
@@ -1851,6 +1849,14 @@ const GAMES = [
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Bank-Robber-2/"
+  },
+  {
+    "id": "batch-hub",
+    "title": "Batch Hub",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Batch-Hub/"
   },
   {
     "id": "bills-must-be-paid",
@@ -1865,7 +1871,7 @@ const GAMES = [
     "title": "Blockblast",
     "category": "puzzle",
     "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "color": "#6366f1",
     "url": "https://staticquasar931.github.io/BlockBlast/"
   },
   {
@@ -1882,7 +1888,7 @@ const GAMES = [
     "title": "Blookblast",
     "category": "puzzle",
     "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "color": "#6366f1",
     "url": "https://staticquasar931.github.io/BlookBlast/"
   },
   {
@@ -1897,16 +1903,16 @@ const GAMES = [
     "id": "bottle-flip",
     "title": "Bottle Flip",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83c\udf7c",
+    "color": "#06b6d4",
     "url": "https://staticquasar931.github.io/Bottle-Flip/"
   },
   {
     "id": "bottle-flip-3d",
     "title": "Bottle Flip 3d",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83c\udf7c",
+    "color": "#06b6d4",
     "url": "https://staticquasar931.github.io/bottle-flip-3d/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Bottle-Flip-3D/Bottle-Flip-3D.png"
   },
@@ -1952,6 +1958,14 @@ const GAMES = [
     "thumb": "https://ubghyper.github.io/GameList.github.io/Cactus-McCoy-2/cactusmccoy2.jpg"
   },
   {
+    "id": "canyouseethis",
+    "title": "Canyouseethis",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/canyouseethis/"
+  },
+  {
     "id": "car-rush",
     "title": "Car Rush",
     "category": "driving",
@@ -1970,50 +1984,50 @@ const GAMES = [
   {
     "id": "clash-of-vikings",
     "title": "Clash Of Vikings",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "multiplayer",
+    "emoji": "\ud83c\udf10",
+    "color": "#0284c7",
     "url": "https://staticquasar931.github.io/Clash-of-Vikings/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Clash-Of-Vikings/Clash-Of-Vikings.png"
   },
   {
     "id": "classic-brawl",
     "title": "Classic Brawl",
-    "category": "action",
-    "emoji": "\ud83d\udca5",
-    "color": "#ea580c",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Classic-Brawl/"
   },
   {
     "id": "coffee-clicker",
     "title": "Coffee Clicker",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Coffee-Clicker/"
   },
   {
     "id": "core-ball",
     "title": "Core Ball",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "puzzle",
+    "emoji": "\ud83c\udfaf",
+    "color": "#1f293b",
     "url": "https://staticquasar931.github.io/Core-Ball/"
   },
   {
     "id": "coreballa",
     "title": "Coreballa",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "sports",
+    "emoji": "\u26bd",
+    "color": "#059669",
     "url": "https://staticquasar931.github.io/coreballa/"
   },
   {
     "id": "cortex-corp---idle-clicker",
     "title": "Cortex Corp Idle Clicker",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Cortex-Corp---Idle-Clicker/"
   },
   {
@@ -2067,9 +2081,9 @@ const GAMES = [
   {
     "id": "cubes2048io",
     "title": "Cubes2048io",
-    "category": "puzzle",
-    "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "category": "multiplayer",
+    "emoji": "\ud83c\udf10",
+    "color": "#0284c7",
     "url": "https://staticquasar931.github.io/Cubes2048IO/"
   },
   {
@@ -2116,8 +2130,8 @@ const GAMES = [
     "id": "drive-beyond-horizons",
     "title": "Drive Beyond Horizons",
     "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
+    "emoji": "\ud83c\udf05",
+    "color": "#c026d3",
     "url": "https://staticquasar931.github.io/Drive-Beyond-Horizons/"
   },
   {
@@ -2162,12 +2176,21 @@ const GAMES = [
     "url": "https://staticquasar931.github.io/Dye-Hard/"
   },
   {
+    "id": "eagl3rxbungee",
+    "title": "Eagl3rxbungee",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/eagl3rxbungee/"
+  },
+  {
     "id": "eaglercraft1.5.2",
     "title": "Eaglercraft1.5.2",
     "category": "multiplayer",
     "emoji": "\ud83c\udf10",
     "color": "#0284c7",
-    "url": "https://staticquasar931.github.io/Eaglercraft1.5.2/"
+    "url": "https://staticquasar931.github.io/Eaglercraft1.5.2/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Eaglercraft/eaglercraft.jpg"
   },
   {
     "id": "eaglercraftx-1.12-offline",
@@ -2175,7 +2198,8 @@ const GAMES = [
     "category": "multiplayer",
     "emoji": "\ud83c\udf10",
     "color": "#0284c7",
-    "url": "https://staticquasar931.github.io/EaglercraftX-1.12-Offline/"
+    "url": "https://staticquasar931.github.io/EaglercraftX-1.12-Offline/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Eaglercraft/eaglercraft.jpg"
   },
   {
     "id": "eaglercraftx-1.8-offline",
@@ -2183,7 +2207,8 @@ const GAMES = [
     "category": "multiplayer",
     "emoji": "\ud83c\udf10",
     "color": "#0284c7",
-    "url": "https://staticquasar931.github.io/EaglercraftX-1.8-Offline/"
+    "url": "https://staticquasar931.github.io/EaglercraftX-1.8-Offline/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Eaglercraft/eaglercraft.jpg"
   },
   {
     "id": "electric-man-2-hs",
@@ -2204,51 +2229,54 @@ const GAMES = [
   {
     "id": "escape-road-2",
     "title": "Escape Road 2",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Escape-Road-2/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Escape-Road-2/Escape-Road-2.png"
   },
   {
     "id": "escape-road-3",
     "title": "Escape Road 3",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Escape-Road-3/",
-    "thumb": "https://ubghyper.github.io/GameList.github.io/Escape-Road-3/Escape-Road-3.png"
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Escape-Road-2/Escape-Road-2.png"
   },
   {
     "id": "escape-road-city-2",
     "title": "Escape Road City 2",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Escape-Road-City-2/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Escape-Road-City-2/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Escape-Road-2/Escape-Road-2.png"
   },
   {
     "id": "escape-road-city-2-local",
     "title": "Escape Road City 2 Local",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Escape-Road-CIty-2-local/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Escape-Road-CIty-2-local/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Escape-Road-2/Escape-Road-2.png"
   },
   {
-    "id": "escape-road-city-2-version-2.3",
-    "title": "Escape Road City 2 Version 2.3",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Escape-Road-City-2-Version-2.3/"
+    "id": "escape-road-oldfail",
+    "title": "Escape Road Oldfail",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Escape-Road-OLDFAIL/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Escape-Road-2/Escape-Road-2.png"
   },
   {
     "id": "fears-to-fathom-home-alone",
     "title": "Fears To Fathom Home Alone",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "puzzle",
+    "emoji": "\ud83c\udfda\ufe0f",
+    "color": "#18181b",
     "url": "https://staticquasar931.github.io/Fears-To-Fathom-Home-Alone/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Fears-To-Fathom-Home-Alone/Fears-To-Fathom-Home-Alone.png"
   },
@@ -2256,7 +2284,7 @@ const GAMES = [
     "id": "floodead-horror",
     "title": "Floodead Horror",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/FlooDead-Horror-/"
   },
@@ -2264,15 +2292,16 @@ const GAMES = [
     "id": "fnaf-2-hidden",
     "title": "Fnaf 2 Hidden",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
-    "url": "https://staticquasar931.github.io/FNAF-2-hidden/"
+    "url": "https://staticquasar931.github.io/FNAF-2-hidden/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/FNAF-2/FNAF-2.png"
   },
   {
     "id": "fnaf-5",
     "title": "Fnaf 5",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/FNAF-5/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/FNAF-5/fnaf5.png"
@@ -2288,9 +2317,9 @@ const GAMES = [
   {
     "id": "fps",
     "title": "Fps",
-    "category": "action",
-    "emoji": "\ud83d\udca5",
-    "color": "#ea580c",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
     "url": "https://staticquasar931.github.io/FPS/"
   },
   {
@@ -2326,14 +2355,6 @@ const GAMES = [
     "url": "https://staticquasar931.github.io/Game-Explore/"
   },
   {
-    "id": "gd-web-beta",
-    "title": "Gd Web Beta",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/GD-Web-Beta/"
-  },
-  {
     "id": "gd4ark-gd4ark",
     "title": "Gd4ark Gd4ark",
     "category": "casual",
@@ -2358,12 +2379,12 @@ const GAMES = [
     "url": "https://staticquasar931.github.io/Genburst-Siwence-Gen-Farm/"
   },
   {
-    "id": "geometry-dash-beta",
-    "title": "Geometry Dash Beta",
+    "id": "genres",
+    "title": "Genres",
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Geometry-Dash-Beta/"
+    "url": "https://staticquasar931.github.io/Genres/"
   },
   {
     "id": "geometry-vibes",
@@ -2392,9 +2413,9 @@ const GAMES = [
   {
     "id": "gladihoppers",
     "title": "Gladihoppers",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "action",
+    "emoji": "\ud83d\udee1\ufe0f",
+    "color": "#78350f",
     "url": "https://staticquasar931.github.io/Gladihoppers/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Gladihoppers/fonts/thumb.png"
   },
@@ -2418,7 +2439,7 @@ const GAMES = [
     "id": "granny",
     "title": "Granny",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/Granny/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Granny/Granny.png"
@@ -2427,7 +2448,7 @@ const GAMES = [
     "id": "granny-nightmare",
     "title": "Granny Nightmare",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/Granny-Nightmare/"
   },
@@ -2459,7 +2480,7 @@ const GAMES = [
     "id": "gunspin",
     "title": "Gunspin",
     "category": "action",
-    "emoji": "\ud83d\udca5",
+    "emoji": "\ud83d\udd2b",
     "color": "#ea580c",
     "url": "https://staticquasar931.github.io/Gunspin/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/gunspin/gunspin.png"
@@ -2485,16 +2506,16 @@ const GAMES = [
     "id": "horror-2d-maze",
     "title": "Horror 2d Maze",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udc7b",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/Horror-2D-Maze/"
   },
   {
     "id": "house-of-hazards",
     "title": "House Of Hazards",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "action",
+    "emoji": "\u26a0\ufe0f",
+    "color": "#dc2626",
     "url": "https://staticquasar931.github.io/House-of-Hazards/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/House-of-Hazards/House-of-Hazards.png"
   },
@@ -2503,32 +2524,40 @@ const GAMES = [
     "title": "Hungry Blocks",
     "category": "puzzle",
     "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "color": "#6366f1",
     "url": "https://staticquasar931.github.io/Hungry-Blocks/"
   },
   {
     "id": "idle-tree-city",
     "title": "Idle Tree City",
     "category": "casual",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
+    "url": "https://staticquasar931.github.io/Idle-Tree-City/"
+  },
+  {
+    "id": "images",
+    "title": "Images",
+    "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Idle-Tree-City/"
+    "url": "https://staticquasar931.github.io/Images/"
   },
   {
     "id": "impossible-road",
     "title": "Impossible Road",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Impossible-Road/"
-  },
-  {
-    "id": "infinite-vault",
-    "title": "Infinite Vault",
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Infinite-Vault/"
+    "url": "https://staticquasar931.github.io/Impossible-Road/"
+  },
+  {
+    "id": "internetfreedomschool",
+    "title": "Internetfreedomschool",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/internetfreedomschool/"
   },
   {
     "id": "interstellar",
@@ -2539,12 +2568,12 @@ const GAMES = [
     "url": "https://staticquasar931.github.io/Interstellar/"
   },
   {
-    "id": "intersteller-trader-beta",
-    "title": "Intersteller Trader Beta",
+    "id": "interstellar-trader-stable",
+    "title": "Interstellar Trader Stable",
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Intersteller-Trader-beta/"
+    "url": "https://staticquasar931.github.io/Interstellar-Trader-stable/"
   },
   {
     "id": "its-raining-boxes",
@@ -2608,7 +2637,8 @@ const GAMES = [
     "category": "driving",
     "emoji": "\ud83c\udfce\ufe0f",
     "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Mario-Kart-wii/"
+    "url": "https://staticquasar931.github.io/Mario-Kart-wii/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/MarioKart/mariokart.png"
   },
   {
     "id": "mario-kart-wii-20",
@@ -2616,7 +2646,8 @@ const GAMES = [
     "category": "driving",
     "emoji": "\ud83c\udfce\ufe0f",
     "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Mario-Kart-wii-20/"
+    "url": "https://staticquasar931.github.io/Mario-Kart-wii-20/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/MarioKart/mariokart.png"
   },
   {
     "id": "mc",
@@ -2680,32 +2711,25 @@ const GAMES = [
     "id": "minesweeper",
     "title": "Minesweeper",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/minesweeper/"
-  },
-  {
-    "id": "minesweepervanilla",
-    "title": "Minesweepervanilla",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/minesweepervanilla/"
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
+    "url": "https://staticquasar931.github.io/minesweeper/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Minesweeper-Plus/MinesweeperPlus.png"
   },
   {
     "id": "mining-corporation",
     "title": "Mining Corporation",
-    "category": "multiplayer",
-    "emoji": "\ud83c\udf10",
-    "color": "#0284c7",
+    "category": "casual",
+    "emoji": "\u26cf\ufe0f",
+    "color": "#b45309",
     "url": "https://staticquasar931.github.io/Mining-Corporation/"
   },
   {
     "id": "monster-tracks",
     "title": "Monster Tracks",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
     "url": "https://staticquasar931.github.io/monster-tracks/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Monster-Tracks/Monster-Tracks.png"
   },
@@ -2737,16 +2761,16 @@ const GAMES = [
     "id": "mr.mine",
     "title": "Mr.mine",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Mr.Mine/"
   },
   {
     "id": "muscle-clicker",
     "title": "Muscle Clicker",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udcaa",
+    "color": "#d97706",
     "url": "https://staticquasar931.github.io/Muscle-Clicker/"
   },
   {
@@ -2755,39 +2779,48 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/My-Perfect-Hotel/"
+    "url": "https://staticquasar931.github.io/My-Perfect-Hotel/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Five-Nights-at-Shreks-Hotel/Five-Nights-at-Shreks-Hotel.png"
   },
   {
     "id": "nano",
     "title": "Nano",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "puzzle",
+    "emoji": "\ud83d\udd2c",
+    "color": "#059669",
     "url": "https://staticquasar931.github.io/nano/"
   },
   {
     "id": "nut-sort-color-puzzle",
     "title": "Nut Sort Color Puzzle",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
+    "emoji": "\ud83d\udd29",
     "color": "#7c3aed",
     "url": "https://staticquasar931.github.io/Nut-Sort-Color-Puzzle/"
   },
   {
     "id": "obby-food-tycoon",
     "title": "Obby Food Tycoon",
-    "category": "multiplayer",
-    "emoji": "\ud83c\udf10",
-    "color": "#0284c7",
+    "category": "casual",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Obby-Food-Tycoon/"
   },
   {
     "id": "only-up",
     "title": "Only Up",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83e\uddd7",
+    "color": "#0284c7",
     "url": "https://staticquasar931.github.io/only-up/"
+  },
+  {
+    "id": "open-source-ios-apps",
+    "title": "Open Source Ios Apps",
+    "category": "multiplayer",
+    "emoji": "\ud83c\udf10",
+    "color": "#0284c7",
+    "url": "https://staticquasar931.github.io/open-source-ios-apps/"
   },
   {
     "id": "osu-mania",
@@ -2795,7 +2828,8 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Osu-Mania/"
+    "url": "https://staticquasar931.github.io/Osu-Mania/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/WebOsu-20/WebOsu-20.png"
   },
   {
     "id": "papasscooperia_v102",
@@ -2803,23 +2837,16 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/papasscooperia_v102/"
+    "url": "https://staticquasar931.github.io/papasscooperia_v102/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Papa-Bakes/papasbakeria.jpg"
   },
   {
     "id": "pixel-planet",
     "title": "Pixel Planet",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "multiplayer",
+    "emoji": "\ud83c\udf0d",
+    "color": "#2563eb",
     "url": "https://staticquasar931.github.io/Pixel-Planet/"
-  },
-  {
-    "id": "pixel-planet-older",
-    "title": "Pixel Planet Older",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Pixel-Planet-older/"
   },
   {
     "id": "plague-inc.",
@@ -2827,7 +2854,8 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Plague-Inc./"
+    "url": "https://staticquasar931.github.io/Plague-Inc./",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Plague-Inc/plagueinc.png"
   },
   {
     "id": "plinko",
@@ -2835,23 +2863,17 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/plinko/"
+    "url": "https://staticquasar931.github.io/plinko/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Free-Plinko-Game-Online/Free-Plinko-Game-Online.png"
   },
   {
     "id": "plinko-balls",
     "title": "Plinko Balls",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Plinko-Balls/"
-  },
-  {
-    "id": "plinkoball-gme",
-    "title": "Plinkoball Gme",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/PlinkoBall-Gme/"
+    "category": "sports",
+    "emoji": "\u26bd",
+    "color": "#059669",
+    "url": "https://staticquasar931.github.io/Plinko-Balls/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Free-Plinko-Game-Online/Free-Plinko-Game-Online.png"
   },
   {
     "id": "pokemonemerald",
@@ -2865,66 +2887,65 @@ const GAMES = [
   {
     "id": "polytrack-0.5.2",
     "title": "Polytrack 0.5.2",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/polytrack-0.5.2/"
-  },
-  {
-    "id": "polytrack-0.5.2-official-nonoffical",
-    "title": "Polytrack 0.5.2 Official Nonoffical",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Polytrack-0.5.2-Official-Nonoffical/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/polytrack-0.5.2/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
     "id": "polytrack-0.5.2.7",
     "title": "Polytrack 0.5.2.7",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/PolyTrack-0.5.2.7/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/PolyTrack-0.5.2.7/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
     "id": "polytrack-0.6.0",
     "title": "Polytrack 0.6.0",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Polytrack-0.6.0/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Polytrack-0.6.0/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
     "id": "polytrack-0.6.2",
     "title": "Polytrack 0.6.2",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Polytrack-0.6.2/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Polytrack-0.6.2/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
     "id": "polytrack-0.6.3",
     "title": "Polytrack 0.6.3",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/PolyTrack-0.6.3/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/PolyTrack-0.6.3/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
     "id": "polytrack-0.6.3-ranked",
     "title": "Polytrack 0.6.3 Ranked",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/PolyTrack-0.6.3-Ranked/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/PolyTrack-0.6.3-Ranked/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
-    "id": "polytrack-archive",
-    "title": "Polytrack Archive",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/PolyTrack-Archive/"
+    "id": "polytrack-tests",
+    "title": "Polytrack Tests",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Polytrack-tests/",
+    "thumb": "https://staticquasar931.github.io/PolyTrack-0.6.3/images/community_tracks.jpg"
   },
   {
     "id": "prison",
@@ -2937,33 +2958,33 @@ const GAMES = [
   {
     "id": "pumpkin-remover",
     "title": "Pumpkin Remover",
-    "category": "puzzle",
-    "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Pumpkin-Remover/"
   },
   {
     "id": "quantum-merge-idle-strategy",
     "title": "Quantum Merge Idle Strategy",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Quantum-Merge-Idle-Strategy/"
   },
   {
     "id": "red-remover",
     "title": "Red Remover",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "emoji": "\ud83d\udfe5",
+    "color": "#ef4444",
     "url": "https://staticquasar931.github.io/Red-Remover/"
   },
   {
     "id": "red-remover-2",
     "title": "Red Remover 2",
     "category": "puzzle",
-    "emoji": "\ud83e\udde9",
-    "color": "#7c3aed",
+    "emoji": "\ud83d\udfe5",
+    "color": "#ef4444",
     "url": "https://staticquasar931.github.io/Red-Remover-2/"
   },
   {
@@ -2973,14 +2994,6 @@ const GAMES = [
     "emoji": "\ud83c\udfce\ufe0f",
     "color": "#dc2626",
     "url": "https://staticquasar931.github.io/Reincarnated-as-a-Dark-Lord-Before-Taking-Over-the-World-with-Power-999999999/"
-  },
-  {
-    "id": "retro-bowl-old",
-    "title": "Retro Bowl Old",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/retro-bowl-old/"
   },
   {
     "id": "retrobowl",
@@ -3005,14 +3018,6 @@ const GAMES = [
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Rocket-Goal/"
-  },
-  {
-    "id": "rocket-goal-old-broken",
-    "title": "Rocket Goal Old Broken",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Rocket-Goal-old-broken/"
   },
   {
     "id": "run3",
@@ -3041,9 +3046,9 @@ const GAMES = [
   {
     "id": "sandboxels",
     "title": "Sandboxels",
-    "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "category": "puzzle",
+    "emoji": "\ud83e\uddea",
+    "color": "#0d9488",
     "url": "https://staticquasar931.github.io/sandboxels/",
     "thumb": "https://ubghyper.github.io/GameList.github.io/Sandboxels/icon.jpg"
   },
@@ -3053,7 +3058,8 @@ const GAMES = [
     "category": "driving",
     "emoji": "\ud83c\udfce\ufe0f",
     "color": "#dc2626",
-    "url": "https://staticquasar931.github.io/Scary-Maze-JumpScare/"
+    "url": "https://staticquasar931.github.io/Scary-Maze-JumpScare/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Granny-3/Granny-3.png"
   },
   {
     "id": "school-facotry",
@@ -3089,6 +3095,22 @@ const GAMES = [
     "thumb": "https://ubghyper.github.io/GameList.github.io/Shell-Shockers/Shell-Shockers.png"
   },
   {
+    "id": "showroom",
+    "title": "Showroom",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/ShowRoom/"
+  },
+  {
+    "id": "sitemap",
+    "title": "Sitemap",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/SiteMap/"
+  },
+  {
     "id": "skibidi-shooter",
     "title": "Skibidi Shooter",
     "category": "action",
@@ -3105,19 +3127,20 @@ const GAMES = [
     "url": "https://staticquasar931.github.io/SkibidiToiletIO/"
   },
   {
-    "id": "slope-alt",
-    "title": "Slope Alt",
+    "id": "slopetestingdontplay",
+    "title": "Slopetestingdontplay",
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/slope-alt-/"
+    "url": "https://staticquasar931.github.io/slopetestingdontplay/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Slope/slope.jpg"
   },
   {
     "id": "slowroads.io",
     "title": "Slowroads.io",
-    "category": "driving",
-    "emoji": "\ud83c\udfce\ufe0f",
-    "color": "#dc2626",
+    "category": "multiplayer",
+    "emoji": "\ud83c\udf10",
+    "color": "#0284c7",
     "url": "https://staticquasar931.github.io/SlowRoads.io/"
   },
   {
@@ -3150,7 +3173,8 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Solar-Smash-Yandex/"
+    "url": "https://staticquasar931.github.io/Solar-Smash-Yandex/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Solar-Smash/Solar-Smash.png"
   },
   {
     "id": "speed-legends",
@@ -3198,31 +3222,40 @@ const GAMES = [
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Static-s-Flappy-Bird/"
+    "url": "https://staticquasar931.github.io/Static-s-Flappy-Bird/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Flappy-Bird/Flappy-Bird.png"
   },
   {
     "id": "static-s-idle-farm",
     "title": "Static S Idle Farm",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Static-s-idle-farm/"
   },
   {
     "id": "static-s-idle-merge-strategy-stable",
     "title": "Static S Idle Merge Strategy Stable",
     "category": "casual",
-    "emoji": "\ud83c\udfae",
-    "color": "#16a34a",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
     "url": "https://staticquasar931.github.io/Static-s-Idle-Merge-Strategy-Stable/"
   },
   {
     "id": "static-s-infinite-factory-tycoon",
     "title": "Static S Infinite Factory Tycoon",
     "category": "casual",
+    "emoji": "\ud83d\udc8e",
+    "color": "#eab308",
+    "url": "https://staticquasar931.github.io/Static-s-Infinite-Factory-Tycoon/"
+  },
+  {
+    "id": "static-s-interstellar-trader",
+    "title": "Static S Interstellar Trader",
+    "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Static-s-Infinite-Factory-Tycoon/"
+    "url": "https://staticquasar931.github.io/Static-s-Interstellar-Trader/"
   },
   {
     "id": "static-s-life-sim",
@@ -3255,6 +3288,14 @@ const GAMES = [
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
     "url": "https://staticquasar931.github.io/Static-Says/"
+  },
+  {
+    "id": "staticcord",
+    "title": "Staticcord",
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Staticcord/"
   },
   {
     "id": "staticquasar931-fun",
@@ -3308,26 +3349,20 @@ const GAMES = [
   {
     "id": "stumble-guys---run-boys-and-girls",
     "title": "Stumble Guys Run Boys And Girls",
-    "category": "multiplayer",
-    "emoji": "\ud83c\udf10",
-    "color": "#0284c7",
-    "url": "https://staticquasar931.github.io/Stumble-Guys---Run-Boys-and-Girls/"
+    "category": "casual",
+    "emoji": "\ud83c\udfae",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/Stumble-Guys---Run-Boys-and-Girls/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Death-Run-3D/Death-Run-3D.png"
   },
   {
     "id": "stumble-guys-gs",
     "title": "Stumble Guys Gs",
-    "category": "multiplayer",
-    "emoji": "\ud83c\udf10",
-    "color": "#0284c7",
-    "url": "https://staticquasar931.github.io/Stumble-Guys-gs/"
-  },
-  {
-    "id": "subway-surfers-bad",
-    "title": "Subway Surfers Bad",
     "category": "casual",
     "emoji": "\ud83c\udfae",
     "color": "#16a34a",
-    "url": "https://staticquasar931.github.io/Subway-Surfers-bad/"
+    "url": "https://staticquasar931.github.io/Stumble-Guys-gs/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Death-Run-3D/Death-Run-3D.png"
   },
   {
     "id": "subwaysurfers",
