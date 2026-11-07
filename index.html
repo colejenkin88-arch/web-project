@@ -5,7 +5,871 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>EduSphere — Student Academic & STEM Portal</title>
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎓</text></svg>" />
-  <link rel="stylesheet" href="css/style.css" />
+  <style>
+/* =============================================
+   ClassPortal — style.css
+   Academic blue theme, dark/light modes
+   ============================================= */
+
+/* ---- CSS Custom Properties ---- */
+:root {
+  /* Dark (default) */
+  --bg:          #0d1117;
+  --bg2:         #161b22;
+  --bg3:         #21262d;
+  --surface:     #1c2128;
+  --surface2:    #262c36;
+  --border:      #30363d;
+  --text:        #e6edf3;
+  --text-muted:  #7d8590;
+
+  --accent:       #1a73e8;
+  --accent-hover: #4285f4;
+  --accent-light: rgba(26,115,232,0.12);
+  --accent-dark:  #1557b0;
+
+  --danger:  #f85149;
+  --success: #3fb950;
+  --warning: #d29922;
+
+  --card-radius: 10px;
+  --navbar-h:    58px;
+  --sidebar-w:   230px;
+  --transition:  0.18s ease;
+  --shadow:      0 4px 20px rgba(0,0,0,.45);
+  --shadow-sm:   0 2px 8px rgba(0,0,0,.3);
+}
+
+[data-theme="light"] {
+  --bg:          #f0f2f5;
+  --bg2:         #ffffff;
+  --bg3:         #e8eaf0;
+  --surface:     #ffffff;
+  --surface2:    #f0f2f5;
+  --border:      #d0d7de;
+  --text:        #1f2328;
+  --text-muted:  #636c76;
+
+  --accent:       #1a73e8;
+  --accent-hover: #1557b0;
+  --accent-light: rgba(26,115,232,0.08);
+  --accent-dark:  #0d47a1;
+
+  --shadow:    0 4px 20px rgba(0,0,0,.12);
+  --shadow-sm: 0 2px 8px rgba(0,0,0,.08);
+}
+
+/* ---- Reset ---- */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Segoe UI', 'Google Sans', system-ui, -apple-system, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  transition: background var(--transition), color var(--transition);
+}
+a { color: var(--accent); }
+button { cursor: pointer; font-family: inherit; }
+input  { font-family: inherit; }
+img    { max-width: 100%; display: block; }
+
+/* ---- Scrollbar ---- */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: var(--border); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ---- Util ---- */
+.hidden  { display: none !important; }
+
+/* =============================================
+   NAVBAR
+   ============================================= */
+.navbar {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: var(--navbar-h);
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  gap: .75rem;
+  padding: 0 1rem;
+  z-index: 1000;
+}
+
+.nav-brand {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--accent);
+  white-space: nowrap;
+  min-width: var(--sidebar-w);
+  user-select: none;
+}
+.nav-brand i { font-size: 1.25rem; }
+.brand-sub {
+  font-size: .68rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: .08em;
+  background: var(--bg3);
+  padding: .15rem .45rem;
+  border-radius: 4px;
+  border: 1px solid var(--border);
+  margin-left: .25rem;
+}
+
+.nav-search {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  background: var(--bg3);
+  border: 1.5px solid var(--border);
+  border-radius: 24px;
+  padding: 0 .85rem;
+  gap: .5rem;
+  max-width: 440px;
+  transition: border-color var(--transition);
+}
+.nav-search:focus-within { border-color: var(--accent); }
+.nav-search i { color: var(--text-muted); font-size: .85rem; flex-shrink: 0; }
+.nav-search input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  outline: none;
+  color: var(--text);
+  font-size: .92rem;
+  padding: .5rem 0;
+}
+.proxy-bar { max-width: none; border-radius: 8px; }
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  margin-left: auto;
+}
+
+.nav-hamburger {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--text);
+  font-size: 1.2rem;
+  padding: .3rem;
+  order: -1;
+}
+
+/* =============================================
+   BUTTONS
+   ============================================= */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: .4rem;
+  padding: .42rem .85rem;
+  border-radius: 6px;
+  font-size: .82rem;
+  font-weight: 600;
+  border: none;
+  text-decoration: none;
+  transition: background var(--transition), color var(--transition), border-color var(--transition), transform 0.1s;
+  white-space: nowrap;
+  color: var(--text);
+}
+.btn:active { transform: scale(0.97); }
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff !important;
+}
+.btn-primary:hover { background: var(--accent-hover); }
+
+.btn-secondary {
+  background: var(--surface2);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.btn-secondary:hover { border-color: var(--accent); color: var(--accent); }
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+}
+.btn-ghost:hover { color: var(--accent); background: var(--accent-light); }
+
+.btn-icon {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1.5px solid var(--border);
+  border-radius: 6px;
+  padding: .4rem .55rem;
+  font-size: .95rem;
+}
+.btn-icon:hover { color: var(--accent); border-color: var(--accent); }
+
+.btn-lg { padding: .65rem 1.3rem; font-size: .95rem; border-radius: 8px; }
+
+/* Panic button */
+.panic-btn { color: var(--danger) !important; border-color: var(--danger) !important; }
+.panic-btn:hover { background: rgba(248,81,73,.1) !important; }
+
+/* =============================================
+   SIDEBAR
+   ============================================= */
+.sidebar {
+  position: fixed;
+  top: var(--navbar-h);
+  left: 0;
+  width: var(--sidebar-w);
+  height: calc(100vh - var(--navbar-h));
+  background: var(--bg2);
+  border-right: 1px solid var(--border);
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: .75rem 0 1rem;
+  z-index: 900;
+  transition: transform var(--transition);
+  display: flex;
+  flex-direction: column;
+  gap: .1rem;
+}
+
+.sidebar-section-label {
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  padding: .6rem 1rem .3rem;
+  margin-top: .4rem;
+}
+
+.sidebar-nav {
+  list-style: none;
+}
+.sidebar-nav li {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  padding: .55rem 1rem;
+  cursor: pointer;
+  font-size: .85rem;
+  color: var(--text-muted);
+  border-radius: 0 8px 8px 0;
+  margin-right: .5rem;
+  transition: background var(--transition), color var(--transition);
+  user-select: none;
+}
+.sidebar-nav li:hover { background: var(--bg3); color: var(--text); }
+.sidebar-nav li.active,
+.sidebar-nav li.active-cat {
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+}
+.sidebar-nav li i { width: 1rem; text-align: center; flex-shrink: 0; }
+
+/* Cloak panel */
+.cloak-panel {
+  margin-top: auto;
+  border-top: 1px solid var(--border);
+  padding-top: .5rem;
+}
+.cloak-options {
+  display: flex;
+  flex-direction: column;
+  gap: .2rem;
+  padding: 0 .5rem;
+}
+.cloak-opt {
+  display: flex;
+  align-items: center;
+  gap: .5rem;
+  padding: .4rem .6rem;
+  border-radius: 6px;
+  font-size: .78rem;
+  font-weight: 500;
+  border: 1px solid transparent;
+  background: transparent;
+  color: var(--text-muted);
+  cursor: pointer;
+  text-align: left;
+  transition: background var(--transition), color var(--transition);
+}
+.cloak-opt:hover { background: var(--bg3); color: var(--text); }
+.cloak-opt.active { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+
+.panic-url-row {
+  padding: .5rem .75rem .25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .3rem;
+}
+.panic-url-row label {
+  font-size: .68rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: .06em;
+  color: var(--text-muted);
+}
+.panic-url-row input {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  color: var(--text);
+  font-size: .75rem;
+  padding: .35rem .5rem;
+  outline: none;
+  width: 100%;
+}
+.panic-url-row input:focus { border-color: var(--accent); }
+
+/* =============================================
+   MAIN CONTENT
+   ============================================= */
+.main-content {
+  margin-left: var(--sidebar-w);
+  margin-top: var(--navbar-h);
+  padding: 1.5rem;
+  min-height: calc(100vh - var(--navbar-h));
+}
+
+.page { display: none; }
+.page.active { display: block; }
+
+/* =============================================
+   HERO
+   ============================================= */
+.hero {
+  background: linear-gradient(135deg, var(--accent) 0%, #0d47a1 100%);
+  border-radius: 12px;
+  padding: 2rem 2rem;
+  margin-bottom: 1.75rem;
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.hero-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: .35rem;
+  background: rgba(255,255,255,0.18);
+  border: 1px solid rgba(255,255,255,0.3);
+  border-radius: 20px;
+  padding: .2rem .65rem;
+  font-size: .72rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  margin-bottom: .6rem;
+  text-transform: uppercase;
+}
+.hero-text h1 { font-size: 1.6rem; margin-bottom: .35rem; }
+.hero-text p  { font-size: .92rem; opacity: .88; max-width: 500px; }
+.hero-actions { display: flex; gap: .6rem; flex-wrap: wrap; }
+.hero .btn-primary {
+  background: rgba(255,255,255,.2);
+  backdrop-filter: blur(4px);
+  border: 1px solid rgba(255,255,255,.35);
+  color: #fff !important;
+}
+.hero .btn-primary:hover { background: rgba(255,255,255,.35); }
+.hero .btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(255,255,255,.4);
+  color: #fff;
+}
+.hero .btn-secondary:hover { background: rgba(255,255,255,.15); }
+
+/* =============================================
+   SECTION HEADER & FILTER TAGS
+   ============================================= */
+.section-header {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: .6rem;
+  margin-bottom: 1.1rem;
+}
+.section-header h2 { font-size: 1.15rem; font-weight: 700; }
+.section-count {
+  font-size: .75rem;
+  color: var(--text-muted);
+  font-weight: 400;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: .15rem .55rem;
+}
+.filter-tags { display: flex; flex-wrap: wrap; gap: .35rem; margin-left: auto; }
+.tag-btn {
+  padding: .28rem .7rem;
+  border-radius: 20px;
+  font-size: .75rem;
+  font-weight: 600;
+  border: 1.5px solid var(--border);
+  background: var(--surface);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.tag-btn:hover, .tag-btn.active {
+  background: var(--accent-light);
+  color: var(--accent);
+  border-color: var(--accent);
+}
+
+/* =============================================
+   GAME GRID & CARDS
+   ============================================= */
+.game-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1rem;
+}
+
+.game-card {
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: var(--card-radius);
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+  position: relative;
+}
+.game-card:hover {
+  transform: translateY(-3px);
+  box-shadow: var(--shadow);
+  border-color: var(--accent);
+}
+
+/* Thumbnail */
+.game-card-thumb {
+  width: 100%;
+  aspect-ratio: 16/9;
+  position: relative;
+  overflow: hidden;
+  background: var(--bg3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+/* Color gradient fallback — set via inline style --thumb-color */
+.game-card-thumb-bg {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.6rem;
+  transition: opacity .25s;
+}
+.game-card-thumb img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: opacity .3s, transform .3s;
+}
+.game-card:hover .game-card-thumb img { transform: scale(1.04); }
+
+/* Play overlay */
+.game-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  transition: opacity var(--transition);
+  font-size: 2.2rem;
+  color: #fff;
+  z-index: 2;
+}
+
+/* Body */
+.game-card-body {
+  padding: .7rem .8rem;
+  display: flex;
+  flex-direction: column;
+  gap: .35rem;
+}
+.game-card-title {
+  font-size: .92rem;
+  font-weight: 700;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text);
+}
+.game-card-meta {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.game-card-tag {
+  font-size: .68rem;
+  padding: .12rem .45rem;
+  border-radius: 10px;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-weight: 600;
+  text-transform: capitalize;
+  white-space: nowrap;
+}
+.fav-btn {
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-size: .95rem;
+  padding: .15rem;
+  border-radius: 50%;
+  transition: color var(--transition), transform .15s;
+  flex-shrink: 0;
+}
+.fav-btn:hover  { color: var(--danger); transform: scale(1.2); }
+.fav-btn.active { color: var(--danger); }
+
+/* =============================================
+   EMPTY STATE
+   ============================================= */
+.empty-state {
+  grid-column: 1/-1;
+  text-align: center;
+  padding: 3.5rem 1rem;
+  color: var(--text-muted);
+}
+.empty-state i { font-size: 2.8rem; margin-bottom: 1rem; opacity: .4; display: block; }
+
+/* =============================================
+   GAME MODAL
+   ============================================= */
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.modal.hidden { display: none; }
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,.72);
+  backdrop-filter: blur(5px);
+  cursor: pointer;
+}
+.modal-box {
+  position: relative;
+  z-index: 1;
+  background: var(--bg2);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  width: min(96vw, 1120px);
+  height: min(92vh, 720px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .6rem 1rem;
+  border-bottom: 1px solid var(--border);
+  background: var(--surface);
+  font-weight: 700;
+  font-size: .95rem;
+  gap: .5rem;
+  flex-shrink: 0;
+}
+.modal-header-info {
+  display: flex;
+  align-items: center;
+  gap: .6rem;
+  min-width: 0;
+}
+.modal-course-badge {
+  background: var(--accent-light);
+  color: var(--accent);
+  border: 1px solid var(--accent);
+  font-size: .7rem;
+  font-weight: 700;
+  padding: .15rem .5rem;
+  border-radius: 4px;
+  letter-spacing: .05em;
+  white-space: nowrap;
+}
+.modal-controls { display: flex; gap: .3rem; }
+.modal-controls button {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 6px;
+  padding: .3rem .5rem;
+  font-size: .9rem;
+  transition: color var(--transition), border-color var(--transition);
+}
+.modal-controls button:hover { color: var(--accent); border-color: var(--accent); }
+
+.modal-body {
+  flex: 1;
+  position: relative;
+  overflow: hidden;
+}
+#gameFrame {
+  width: 100%;
+  height: 100%;
+  border: none;
+  display: block;
+  background: #000;
+}
+
+/* =============================================
+   IFRAME LOADER & ERROR
+   ============================================= */
+.iframe-loader,
+.iframe-error {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg);
+  gap: .85rem;
+  color: var(--text-muted);
+  font-size: .88rem;
+  z-index: 10;
+  text-align: center;
+  padding: 1rem;
+}
+.iframe-error i { font-size: 2.2rem; color: var(--warning); }
+
+.spinner {
+  width: 42px;
+  height: 42px;
+  border: 4px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin .65s linear infinite;
+  flex-shrink: 0;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+/* =============================================
+   TOAST NOTIFICATIONS
+   ============================================= */
+.toast-container {
+  position: fixed;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: .4rem;
+  z-index: 9999;
+  pointer-events: none;
+}
+.toast {
+  display: flex;
+  align-items: center;
+  gap: .55rem;
+  background: var(--surface2);
+  border: 1px solid var(--border);
+  border-radius: 9px;
+  padding: .6rem .9rem;
+  font-size: .82rem;
+  font-weight: 500;
+  color: var(--text);
+  box-shadow: var(--shadow-sm);
+  animation: slideIn .22s ease, fadeOut .28s ease 2.2s forwards;
+  pointer-events: auto;
+  min-width: 210px;
+  max-width: 320px;
+}
+.toast i { font-size: .95rem; flex-shrink: 0; }
+.toast.success i { color: var(--success); }
+.toast.info    i { color: var(--accent); }
+.toast.warning i { color: var(--warning); }
+.toast.error   i { color: var(--danger); }
+
+@keyframes slideIn {
+  from { transform: translateX(110%); opacity: 0; }
+  to   { transform: translateX(0);    opacity: 1; }
+}
+@keyframes fadeOut {
+  to { opacity: 0; transform: translateY(6px); }
+}
+
+/* =============================================
+   ABOUT PAGE
+   ============================================= */
+.about-container { max-width: 720px; margin: 0 auto; }
+.about-container h2 { font-size: 1.6rem; margin-bottom: .9rem; }
+.about-container h3 { font-size: 1rem; margin: 1.5rem 0 .45rem; color: var(--accent); }
+.about-container p  { color: var(--text-muted); line-height: 1.7; margin-bottom: .65rem; font-size: .9rem; }
+.about-container details {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: .7rem 1rem;
+  margin-bottom: .4rem;
+}
+.about-container summary {
+  font-weight: 600;
+  font-size: .9rem;
+  cursor: pointer;
+  color: var(--text);
+}
+.about-container details[open] summary { color: var(--accent); }
+.about-container details p { margin-top: .55rem; font-size: .85rem; }
+
+/* =============================================
+   PROXY PAGE
+   ============================================= */
+.proxy-main {
+  margin-top: var(--navbar-h);
+  height: calc(100vh - var(--navbar-h));
+  display: flex;
+  flex-direction: column;
+}
+.proxy-hero {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, var(--accent-light) 0%, transparent 70%);
+}
+.proxy-hero-inner {
+  text-align: center;
+  max-width: 580px;
+  padding: 2rem 1.5rem;
+}
+.proxy-hero-inner i   { color: var(--accent); margin-bottom: 1rem; }
+.proxy-hero-inner h1  { font-size: 2.2rem; margin-bottom: .4rem; }
+.proxy-hero-inner > p { color: var(--text-muted); margin-bottom: 1.4rem; font-size: 1rem; }
+
+.proxy-input-group {
+  display: flex;
+  gap: .4rem;
+  margin-bottom: 1.1rem;
+}
+.proxy-input-group input {
+  flex: 1;
+  background: var(--surface);
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-size: .95rem;
+  padding: .65rem 1rem;
+  outline: none;
+  transition: border-color var(--transition);
+}
+.proxy-input-group input:focus { border-color: var(--accent); }
+
+.proxy-quicklinks {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: .35rem;
+  justify-content: center;
+  margin-bottom: 1.3rem;
+}
+.proxy-quicklinks span { color: var(--text-muted); font-size: .8rem; }
+.quicklink {
+  padding: .28rem .7rem;
+  border-radius: 20px;
+  font-size: .76rem;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  background: var(--surface2);
+  color: var(--text-muted);
+  cursor: pointer;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.quicklink:hover { background: var(--accent-light); color: var(--accent); border-color: var(--accent); }
+
+.proxy-note { font-size: .76rem !important; color: var(--warning) !important; margin: 0 !important; opacity: .8; }
+
+.proxy-frame-container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+.proxy-toolbar {
+  display: flex;
+  align-items: center;
+  gap: .35rem;
+  padding: .35rem .65rem;
+  background: var(--bg2);
+  border-bottom: 1px solid var(--border);
+}
+.proxy-toolbar button {
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  border-radius: 5px;
+  padding: .28rem .55rem;
+  font-size: .85rem;
+  transition: color var(--transition), background var(--transition);
+}
+.proxy-toolbar button:hover { color: var(--accent); background: var(--accent-light); }
+.proxy-url-display {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: .45rem;
+  background: var(--bg3);
+  border: 1px solid var(--border);
+  border-radius: 5px;
+  padding: .28rem .7rem;
+  font-size: .8rem;
+  color: var(--text-muted);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.proxy-url-display i  { flex-shrink: 0; font-size: .75rem; color: var(--success); }
+.proxy-url-display span { overflow: hidden; text-overflow: ellipsis; }
+#proxyFrame { flex: 1; border: none; width: 100%; background: #fff; }
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 840px) {
+  :root { --sidebar-w: 0px; }
+  .sidebar { width: 240px; transform: translateX(-100%); }
+  .sidebar.open { transform: translateX(0); box-shadow: var(--shadow); }
+  .main-content { margin-left: 0; padding: 1rem; }
+  .nav-hamburger { display: flex; }
+  .nav-brand { min-width: auto; }
+  .nav-search { max-width: none; }
+  .btn-label { display: none; }
+  .hero { flex-direction: column; text-align: center; }
+  .hero-text p { max-width: none; }
+}
+@media (max-width: 600px) {
+  .modal-box { width: 100vw; height: 100vh; border-radius: 0; }
+  .game-grid { grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: .7rem; }
+  .navbar { padding: 0 .6rem; gap: .4rem; }
+  .hero { padding: 1.25rem 1rem; }
+  .hero-text h1 { font-size: 1.3rem; }
+  .proxy-input-group { flex-direction: column; }
+}
+
+</style>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
   <script>
     (function(){
@@ -249,7 +1113,931 @@
       }
     }
   </script>
-  <script src="js/games.js?v=13"></script>
-  <script src="js/app.js?v=13"></script>
+  <script>
+/**
+ * games.js — NexusPlay / EduSphere Game Library
+ *
+ * 100% Unblocked Endpoints & Verified High-Res Previews
+ */
+
+const GAMES = [
+  {
+    "id": "fnaf-1",
+    "title": "Five Nights at Freddy's 1",
+    "category": "puzzle",
+    "emoji": "\ud83d\udc3b",
+    "color": "#1c1917",
+    "url": "https://staticquasar931.github.io/FNAF-1/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/FNAF-1/FNAF-1.png"
+  },
+  {
+    "id": "fnaf-2",
+    "title": "Five Nights at Freddy's 2",
+    "category": "puzzle",
+    "emoji": "\ud83d\udc30",
+    "color": "#1e293b",
+    "url": "https://staticquasar931.github.io/FNAF-2-hidden/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/FNAF-2/FNAF-2.png"
+  },
+  {
+    "id": "fnaf-3",
+    "title": "Five Nights at Freddy's 3",
+    "category": "puzzle",
+    "emoji": "\ud83e\udd8a",
+    "color": "#14532d",
+    "url": "https://staticquasar931.github.io/FNAF-3/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/FNAF-1/FNAF-1.png"
+  },
+  {
+    "id": "fnaf-4",
+    "title": "Five Nights at Freddy's 4",
+    "category": "puzzle",
+    "emoji": "\ud83d\udc7e",
+    "color": "#701a75",
+    "url": "https://staticquasar931.github.io/FNAF-4/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/FNAF-2/FNAF-2.png"
+  },
+  {
+    "id": "granny-1",
+    "title": "Granny Chapter 1",
+    "category": "puzzle",
+    "emoji": "\ud83d\udc75",
+    "color": "#44403c",
+    "url": "https://staticquasar931.github.io/Granny/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Granny-2/Granny-2.png"
+  },
+  {
+    "id": "granny-2",
+    "title": "Granny Chapter 2",
+    "category": "puzzle",
+    "emoji": "\ud83e\uddd3",
+    "color": "#374151",
+    "url": "https://staticquasar931.github.io/Granny-2/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Granny-2/Granny-2.png"
+  },
+  {
+    "id": "granny-3",
+    "title": "Granny Chapter 3",
+    "category": "puzzle",
+    "emoji": "\ud83c\udfda\ufe0f",
+    "color": "#27272a",
+    "url": "https://staticquasar931.github.io/Granny-3/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Granny-3/Granny-3.png"
+  },
+  {
+    "id": "baldis-basics",
+    "title": "Baldi's Basics Classic",
+    "category": "puzzle",
+    "emoji": "\ud83d\udccf",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/BaldisBasics/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/BALDI/BALDI.png"
+  },
+  {
+    "id": "scary-maze",
+    "title": "Scary Maze Horror",
+    "category": "puzzle",
+    "emoji": "\ud83d\ude31",
+    "color": "#0f172a",
+    "url": "https://staticquasar931.github.io/Scary-Maze-JumpScare/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Granny-3/Granny-3.png"
+  },
+  {
+    "id": "bloxd-bedwars",
+    "title": "Bloxd.io (Roblox Bedwars & Obby)",
+    "category": "multiplayer",
+    "emoji": "\ud83e\uddf1",
+    "color": "#0284c7",
+    "url": "https://bloxd.io/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Eaglercraft/eaglercraft.jpg"
+  },
+  {
+    "id": "rainbow-obby",
+    "title": "Roblox Rainbow Obby 3D",
+    "category": "multiplayer",
+    "emoji": "\ud83c\udf08",
+    "color": "#8b5cf6",
+    "url": "https://ubghyper.github.io/GameList.github.io/Rainbow-Obby-v03x/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Rainbow-Obby-v03x/Rainbow-Obby-v03x.png"
+  },
+  {
+    "id": "eaglercraft",
+    "title": "Minecraft 1.8 (Eaglercraft)",
+    "category": "multiplayer",
+    "emoji": "\u26cf\ufe0f",
+    "color": "#15803d",
+    "url": "https://staticquasar931.github.io/EaglercraftX-1.8-Offline/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Eaglercraft/eaglercraft.jpg"
+  },
+  {
+    "id": "minecraft-parkour",
+    "title": "Minecraft Parkour 3D",
+    "category": "action",
+    "emoji": "\ud83c\udfc3",
+    "color": "#166534",
+    "url": "https://staticquasar931.github.io/Minecraft-Parkour/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Eaglercraft/eaglercraft.jpg"
+  },
+  {
+    "id": "retro-bowl",
+    "title": "Retro Bowl",
+    "category": "sports",
+    "emoji": "\ud83c\udfc8",
+    "color": "#1e3a8a",
+    "url": "https://staticquasar931.github.io/Retro-Bowl/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Retro-Bowl/retrobowl.jpg"
+  },
+  {
+    "id": "soccer-random",
+    "title": "Soccer Random",
+    "category": "sports",
+    "emoji": "\u26bd",
+    "color": "#059669",
+    "url": "https://staticquasar931.github.io/SoccerRandom/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Soccer-Random/soccerrandom.png"
+  },
+  {
+    "id": "2-minute-football",
+    "title": "2 Minute Football",
+    "category": "sports",
+    "emoji": "\ud83c\udfc8",
+    "color": "#0284c7",
+    "url": "https://staticquasar931.github.io/2-minute-football/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Retro-Bowl/retrobowl.jpg"
+  },
+  {
+    "id": "axis-football",
+    "title": "Axis Football League",
+    "category": "sports",
+    "emoji": "\ud83c\udfc6",
+    "color": "#b45309",
+    "url": "https://staticquasar931.github.io/Axis-Football-League/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Retro-Bowl/retrobowl.jpg"
+  },
+  {
+    "id": "hoop-royale",
+    "title": "Hoop Royale",
+    "category": "sports",
+    "emoji": "\ud83c\udfc0",
+    "color": "#ea580c",
+    "url": "https://staticquasar931.github.io/HoopRoyale/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Basket-Random/basketrandom.png"
+  },
+  {
+    "id": "ragdoll-archers",
+    "title": "Ragdoll Archers",
+    "category": "sports",
+    "emoji": "\ud83c\udff9",
+    "color": "#d97706",
+    "url": "https://staticquasar931.github.io/Ragdoll-Archers/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Basket-Random/basketrandom.png"
+  },
+  {
+    "id": "1v1-lol",
+    "title": "1v1.LOL Battle Royale",
+    "category": "action",
+    "emoji": "\ud83c\udfaf",
+    "color": "#0ea5e9",
+    "url": "https://staticquasar931.github.io/1v1.Lol/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/1v1-LOL/1v1-LOL.png"
+  },
+  {
+    "id": "cs-16",
+    "title": "Counter-Strike 1.6 Web",
+    "category": "action",
+    "emoji": "\ud83d\udd2b",
+    "color": "#334155",
+    "url": "https://staticquasar931.github.io/CS-1.6/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/1v1-LOL/1v1-LOL.png"
+  },
+  {
+    "id": "pixel-gun-3d",
+    "title": "Pixel Gun 3D",
+    "category": "action",
+    "emoji": "\ud83d\udfe9",
+    "color": "#16a34a",
+    "url": "https://staticquasar931.github.io/pixel-gun-3d/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/1v1-LOL/1v1-LOL.png"
+  },
+  {
+    "id": "gun-mayhem",
+    "title": "Gun Mayhem Action",
+    "category": "action",
+    "emoji": "\ud83d\udca5",
+    "color": "#ea580c",
+    "url": "https://staticquasar931.github.io/Gun-Mayhem/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/1v1-LOL/1v1-LOL.png"
+  },
+  {
+    "id": "cluster-rush",
+    "title": "Cluster Rush 3D",
+    "category": "action",
+    "emoji": "\ud83d\ude9a",
+    "color": "#d97706",
+    "url": "https://staticquasar931.github.io/Cluster-Rush/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Cluster-Rush/Cluster-Rush.png"
+  },
+  {
+    "id": "awesome-tanks-2",
+    "title": "Awesome Tanks 2",
+    "category": "action",
+    "emoji": "\ud83d\ude9c",
+    "color": "#65a30d",
+    "url": "https://staticquasar931.github.io/Awesome-Tanks-2/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/1v1-LOL/1v1-LOL.png"
+  },
+  {
+    "id": "drift-boss",
+    "title": "Drift Boss",
+    "category": "driving",
+    "emoji": "\ud83d\ude97",
+    "color": "#d97706",
+    "url": "https://staticquasar931.github.io/Drift-Boss/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Drift-Boss/driftboss.png"
+  },
+  {
+    "id": "drift-hunters",
+    "title": "Drift Hunters 3D",
+    "category": "driving",
+    "emoji": "\ud83c\udfce\ufe0f",
+    "color": "#b91c1c",
+    "url": "https://staticquasar931.github.io/Drift-Hunters/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Drift-Boss/driftboss.png"
+  },
+  {
+    "id": "moto-x3m",
+    "title": "Moto X3M Pool Party",
+    "category": "driving",
+    "emoji": "\ud83c\udfcd\ufe0f",
+    "color": "#ef4444",
+    "url": "https://staticquasar931.github.io/MotoX3M/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Moto-X3M-Pool-Party/Moto-X3M-Pool-Party.png"
+  },
+  {
+    "id": "polytrack",
+    "title": "PolyTrack 3D",
+    "category": "driving",
+    "emoji": "\ud83c\udfc1",
+    "color": "#6366f1",
+    "url": "https://staticquasar931.github.io/polytrack/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Drift-Boss/driftboss.png"
+  },
+  {
+    "id": "crazy-cars",
+    "title": "Crazy Cars",
+    "category": "driving",
+    "emoji": "\ud83d\ude99",
+    "color": "#0284c7",
+    "url": "https://staticquasar931.github.io/Crazy-Cars/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Drift-Boss/driftboss.png"
+  },
+  {
+    "id": "slope",
+    "title": "Slope 3D",
+    "category": "casual",
+    "emoji": "\u26a1",
+    "color": "#10b981",
+    "url": "https://staticquasar931.github.io/slope/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Slope/slope.jpg"
+  },
+  {
+    "id": "subway-surfers",
+    "title": "Subway Surfers NYC",
+    "category": "casual",
+    "emoji": "\ud83d\ude87",
+    "color": "#8b5cf6",
+    "url": "https://staticquasar931.github.io/SubwaySurfersNewyork2023/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Subway-Surfers/Subway-Surfers.png"
+  },
+  {
+    "id": "cookie-clicker",
+    "title": "Cookie Clicker",
+    "category": "casual",
+    "emoji": "\ud83c\udf6a",
+    "color": "#92400e",
+    "url": "https://staticquasar931.github.io/Cookie-Clicker/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Cookie-Clicker/cookieclicker.jpg"
+  },
+  {
+    "id": "crossy-road",
+    "title": "Crossy Road",
+    "category": "casual",
+    "emoji": "\ud83d\udc14",
+    "color": "#22c55e",
+    "url": "https://staticquasar931.github.io/Crossy-Road/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Crossy-Road/crossyroad.png"
+  },
+  {
+    "id": "bitlife",
+    "title": "BitLife Simulator",
+    "category": "casual",
+    "emoji": "\ud83e\uddec",
+    "color": "#e11d48",
+    "url": "https://staticquasar931.github.io/Bitlife/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Bitlife/bitlife.jpg"
+  },
+  {
+    "id": "geometry-dash",
+    "title": "Geometry Dash Lite",
+    "category": "casual",
+    "emoji": "\ud83d\udd37",
+    "color": "#7c3aed",
+    "url": "https://staticquasar931.github.io/Geometry-Dash/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Geometry-Dash-Lite/Geometry-Dash-Lite.png"
+  },
+  {
+    "id": "snow-rider-3d",
+    "title": "Snow Rider 3D",
+    "category": "casual",
+    "emoji": "\ud83d\udef7",
+    "color": "#0ea5e9",
+    "url": "https://staticquasar931.github.io/snowrider3D/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Slope/slope.jpg"
+  },
+  {
+    "id": "block-blast",
+    "title": "Block Blast Puzzle",
+    "category": "puzzle",
+    "emoji": "\ud83e\uddf1",
+    "color": "#3b82f6",
+    "url": "https://staticquasar931.github.io/BlockBlast/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Block-Blast-Puzzle/Block-Blast-Puzzle.png"
+  },
+  {
+    "id": "bad-piggies",
+    "title": "Bad Piggies HD",
+    "category": "puzzle",
+    "emoji": "\ud83d\udc37",
+    "color": "#84cc16",
+    "url": "https://staticquasar931.github.io/Bad-Piggies/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Bad-Piggies/badpiggies.png"
+  },
+  {
+    "id": "solar-smash",
+    "title": "Solar Smash Planet Sandbox",
+    "category": "puzzle",
+    "emoji": "\ud83e\ude90",
+    "color": "#6366f1",
+    "url": "https://staticquasar931.github.io/Solar-Smash-Yandex/",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Solar-Smash/Solar-Smash.png"
+  },
+  {
+    "id": "plague-inc",
+    "title": "Plague Inc. Simulator",
+    "category": "puzzle",
+    "emoji": "\ud83e\udda0",
+    "color": "#991b1b",
+    "url": "https://staticquasar931.github.io/Plague-Inc./",
+    "thumb": "https://ubghyper.github.io/GameList.github.io/Solar-Smash/Solar-Smash.png"
+  }
+];
+
+const CATEGORY_META = {
+  sports:      { label: "Sports",          icon: "fa-football" },
+  action:      { label: "Action",          icon: "fa-burst" },
+  driving:     { label: "Driving",         icon: "fa-car" },
+  casual:      { label: "Casual & Reflex", icon: "fa-dice" },
+  multiplayer: { label: "Roblox & .IO",    icon: "fa-cubes" },
+  puzzle:      { label: "Horror & Puzzle", icon: "fa-ghost" },
+};
+
+const CATEGORIES = Object.keys(CATEGORY_META);
+
+</script>
+  <script>
+/**
+ * app.js — ClassPortal main application
+ *
+ * Features:
+ *  - Page navigation (home / favorites / recent / about)
+ *  - Category + tag filtering
+ *  - Live search
+ *  - Game card rendering with real thumbnails + colored gradient fallback
+ *  - Favorites & recently-played (localStorage)
+ *  - Game modal with loading spinner
+ *  - Proxy-retry: if iframe fails to load, auto-route through CORS relay
+ *  - Panic button (click OR Escape key outside modal)
+ *  - Tab cloak (change tab title + favicon)
+ *  - Toast notification system
+ */
+
+// ── CORS proxy backends for blocked-game fallback ─────────────────────────
+const RELAY_BACKENDS = [
+  (url) => `https://corsproxy.io/?${encodeURIComponent(url)}`,
+  (url) => `https://api.allorigins.win/raw?url=${encodeURIComponent(url)}`,
+  (url) => `https://api.codetabs.com/v1/proxy?quest=${encodeURIComponent(url)}`,
+];
+
+// ── State ─────────────────────────────────────────────────────────────────
+const state = {
+  page:        "home",
+  category:    "all",
+  search:      "",
+  favorites:   new Set(JSON.parse(localStorage.getItem("cp_favorites") || "[]")),
+  recent:      JSON.parse(localStorage.getItem("cp_recent") || "[]"),
+  currentGame: null,
+  relayIdx:    0,
+  loadTimer:   null,
+};
+
+// ── DOM helpers ───────────────────────────────────────────────────────────
+const $ = (s) => document.querySelector(s);
+const $$ = (s) => document.querySelectorAll(s);
+
+const gameGrid       = $("#gameGrid");
+const favGrid        = $("#favGrid");
+const recentGrid     = $("#recentGrid");
+const searchInput    = $("#searchInput");
+const filterTags     = $("#filterTags");
+const sectionTitle   = $("#sectionTitle");
+const gameCountBadge = $("#gameCountBadge");
+const gameModal      = $("#gameModal");
+const gameFrame      = $("#gameFrame");
+const iframeLoader   = $("#iframeLoader");
+const iframeError    = $("#iframeError");
+const loaderMsg      = $("#loaderMsg");
+const modalTitle     = $("#modalTitle");
+const modalCourseBadge = $("#modalCourseBadge");
+const modalFav       = $("#modalFav");
+const toastContainer = $("#toastContainer");
+const sidebar        = $("#sidebar");
+const hamburger      = $("#hamburger");
+const themeToggle    = $("#themeToggle");
+const panicBtn       = $("#panicBtn");
+const panicUrlInput  = $("#panicUrlInput");
+const brandLogo      = $("#brandLogo");
+const heroRandom     = $("#heroRandom");
+const randomGameBtn  = $("#randomGame");
+
+// ── Theme ─────────────────────────────────────────────────────────────────
+function initTheme() {
+  const saved = localStorage.getItem("cp_theme") || "dark";
+  document.documentElement.setAttribute("data-theme", saved);
+  updateThemeIcon(saved);
+}
+function toggleTheme() {
+  const next = document.documentElement.getAttribute("data-theme") === "dark" ? "light" : "dark";
+  document.documentElement.setAttribute("data-theme", next);
+  localStorage.setItem("cp_theme", next);
+  updateThemeIcon(next);
+}
+function updateThemeIcon(theme) {
+  const icon = themeToggle?.querySelector("i");
+  if (icon) icon.className = theme === "dark" ? "fa-solid fa-sun" : "fa-solid fa-moon";
+}
+themeToggle?.addEventListener("click", toggleTheme);
+initTheme();
+
+// ── Hamburger ─────────────────────────────────────────────────────────────
+hamburger?.addEventListener("click", (e) => {
+  e.stopPropagation();
+  sidebar.classList.toggle("open");
+});
+document.addEventListener("click", (e) => {
+  if (sidebar && !sidebar.contains(e.target) && e.target !== hamburger) {
+    sidebar.classList.remove("open");
+  }
+});
+
+// ── Panic / Boss Key ──────────────────────────────────────────────────────
+function getPanicUrl() {
+  return localStorage.getItem("cp_panic_url") || "https://classroom.google.com";
+}
+function triggerPanic() {
+  window.location.href = getPanicUrl();
+}
+
+panicBtn?.addEventListener("click", triggerPanic);
+
+// Escape key: close modal if open, else panic
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape") {
+    if (!gameModal.classList.contains("hidden")) {
+      closeGame();
+    } else {
+      triggerPanic();
+    }
+  }
+});
+
+// Save custom panic URL
+panicUrlInput?.addEventListener("input", () => {
+  localStorage.setItem("cp_panic_url", panicUrlInput.value.trim() || "https://classroom.google.com");
+});
+// Load saved panic URL
+if (panicUrlInput) {
+  panicUrlInput.value = localStorage.getItem("cp_panic_url") || "";
+}
+
+// ── Tab Cloak ─────────────────────────────────────────────────────────────
+let cloakClickCount = 0;
+let cloakClickTimer = null;
+
+brandLogo?.addEventListener("click", () => {
+  cloakClickCount++;
+  clearTimeout(cloakClickTimer);
+  cloakClickTimer = setTimeout(() => { cloakClickCount = 0; }, 600);
+  if (cloakClickCount >= 3) {
+    cloakClickCount = 0;
+    const panel = $(".cloak-panel");
+    if (panel) {
+      panel.style.display = panel.style.display === "none" ? "" : "none";
+    }
+  }
+});
+
+$$(".cloak-opt").forEach((btn) => {
+  btn.addEventListener("click", () => {
+    $$(".cloak-opt").forEach((b) => b.classList.remove("active"));
+    btn.classList.add("active");
+    applyCloak(btn.dataset.title, btn.dataset.icon);
+  });
+});
+
+function applyCloak(title, icon) {
+  document.title = title;
+  const link = document.querySelector("link[rel='icon']") || document.createElement("link");
+  link.rel = "icon";
+  link.href = `data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>${icon}</text></svg>`;
+  document.head.appendChild(link);
+  localStorage.setItem("cp_cloak_title", title);
+  localStorage.setItem("cp_cloak_icon", icon);
+}
+
+// Restore cloak on page load
+(function restoreCloak() {
+  const title = localStorage.getItem("cp_cloak_title");
+  const icon  = localStorage.getItem("cp_cloak_icon");
+  if (title && icon) {
+    applyCloak(title, icon);
+    $$(".cloak-opt").forEach((b) => {
+      if (b.dataset.title === title) b.classList.add("active");
+      else b.classList.remove("active");
+    });
+  }
+})();
+
+// ── Sidebar Page Navigation ───────────────────────────────────────────────
+$$(".sidebar-nav li[data-page]").forEach((item) => {
+  item.addEventListener("click", () => {
+    $$(".sidebar-nav li[data-page]").forEach((l) => l.classList.remove("active"));
+    item.classList.add("active");
+    navigateTo(item.dataset.page);
+    sidebar.classList.remove("open");
+  });
+});
+
+// ── Sidebar Category Navigation ───────────────────────────────────────────
+$$(".sidebar-nav li[data-category]").forEach((item) => {
+  item.addEventListener("click", () => {
+    $$(".sidebar-nav li[data-category]").forEach((l) => l.classList.remove("active-cat"));
+    item.classList.add("active-cat");
+    state.category = item.dataset.category;
+    switchToHome();
+    renderGameGrid();
+    syncSectionTitle();
+    syncTagButtons();
+    updateCount();
+    sidebar.classList.remove("open");
+  });
+});
+
+function switchToHome() {
+  $$(".sidebar-nav li[data-page]").forEach((l) => l.classList.remove("active"));
+  $(".sidebar-nav li[data-page='home']")?.classList.add("active");
+  navigateTo("home");
+}
+
+// ── Page Routing ──────────────────────────────────────────────────────────
+function navigateTo(page) {
+  $$(".page").forEach((p) => p.classList.remove("active"));
+  $(`#page-${page}`)?.classList.add("active");
+  state.page = page;
+  if (page === "favorites") renderFavorites();
+  if (page === "recent")    renderRecent();
+}
+
+// ── Filter Tags ───────────────────────────────────────────────────────────
+function buildFilterTags() {
+  filterTags.innerHTML = "";
+  const allBtn = makeTagBtn("all", "All");
+  filterTags.appendChild(allBtn);
+  CATEGORIES.forEach((cat) => {
+    filterTags.appendChild(makeTagBtn(cat, CATEGORY_META[cat].label));
+  });
+  syncTagButtons();
+}
+
+function makeTagBtn(cat, label) {
+  const btn = document.createElement("button");
+  btn.className = "tag-btn";
+  btn.dataset.cat = cat;
+  btn.textContent = label;
+  btn.addEventListener("click", () => {
+    state.category = cat;
+    syncTagButtons();
+    syncSidebarCat(cat);
+    renderGameGrid();
+    syncSectionTitle();
+    updateCount();
+  });
+  return btn;
+}
+
+function syncTagButtons() {
+  $$(".tag-btn").forEach((b) => b.classList.toggle("active", b.dataset.cat === state.category));
+}
+function syncSidebarCat(cat) {
+  $$(".sidebar-nav li[data-category]").forEach((l) => l.classList.remove("active-cat"));
+  $(`.sidebar-nav li[data-category="${cat}"]`)?.classList.add("active-cat");
+}
+function syncSectionTitle() {
+  sectionTitle.textContent =
+    state.category === "all"
+      ? "All Activities"
+      : (CATEGORY_META[state.category]?.label || state.category) + " Activities";
+}
+function updateCount() {
+  const n = getFilteredGames().length;
+  if (gameCountBadge) gameCountBadge.textContent = `${n} activit${n !== 1 ? "ies" : "y"}`;
+}
+
+// ── Game Filtering ────────────────────────────────────────────────────────
+function getFilteredGames() {
+  let list = GAMES;
+  if (state.category !== "all") list = list.filter((g) => g.category === state.category);
+  if (state.search) {
+    const q = state.search.toLowerCase();
+    list = list.filter(
+      (g) => g.title.toLowerCase().includes(q) ||
+             (CATEGORY_META[g.category]?.label || g.category).toLowerCase().includes(q)
+    );
+  }
+  return list;
+}
+
+// ── Game Grid ─────────────────────────────────────────────────────────────
+function renderGameGrid() {
+  const games = getFilteredGames();
+  gameGrid.innerHTML = "";
+  if (!games.length) {
+    gameGrid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-gamepad"></i><p>No games found matching your search.</p></div>`;
+    return;
+  }
+  games.forEach((g) => gameGrid.appendChild(makeCard(g)));
+}
+
+function renderFavorites() {
+  favGrid.innerHTML = "";
+  const faves = GAMES.filter((g) => state.favorites.has(g.id));
+  if (!faves.length) {
+    favGrid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-star"></i><p>No favorite games yet — click ★ on any game card to pin it here.</p></div>`;
+    return;
+  }
+  faves.forEach((g) => favGrid.appendChild(makeCard(g)));
+}
+
+function renderRecent() {
+  recentGrid.innerHTML = "";
+  const recents = state.recent.map((id) => GAMES.find((g) => g.id === id)).filter(Boolean);
+  if (!recents.length) {
+    recentGrid.innerHTML = `<div class="empty-state"><i class="fa-solid fa-clock-rotate-left"></i><p>No games played yet. Pick any game to play!</p></div>`;
+    return;
+  }
+  recents.forEach((g) => recentGrid.appendChild(makeCard(g)));
+}
+
+// ── Card Factory ──────────────────────────────────────────────────────────
+function makeCard(game) {
+  const isFav = state.favorites.has(game.id);
+  const catMeta = CATEGORY_META[game.category] || { label: game.category, icon: "fa-gamepad" };
+
+  const card = document.createElement("div");
+  card.className = "game-card";
+
+  const gradStyle = game.color
+    ? `background: linear-gradient(135deg, ${game.color}cc 0%, ${game.color}44 100%);`
+    : "background: var(--bg3);";
+
+  card.innerHTML = `
+    <div class="game-card-thumb">
+      <div class="game-card-thumb-bg" style="${gradStyle}">${game.emoji}</div>
+      ${game.thumb ? `<img
+        src="${game.thumb}"
+        alt="${game.title}"
+        loading="lazy"
+        decoding="async"
+        onerror="this.style.display='none'"
+      />` : ""}
+    </div>
+    <div class="game-card-overlay"><i class="fa-solid fa-play"></i></div>
+    <div class="game-card-body">
+      <div class="game-card-title" title="${game.title}">${game.title}</div>
+      <div class="game-card-meta">
+        <span class="game-card-tag"><i class="fa-solid ${catMeta.icon}"></i> ${catMeta.label}</span>
+        <button class="fav-btn ${isFav ? "active" : ""}" data-id="${game.id}"
+          title="${isFav ? "Remove from favorites" : "Add to favorites"}">
+          <i class="fa-${isFav ? "solid" : "regular"} fa-heart"></i>
+        </button>
+      </div>
+    </div>
+  `;
+
+  card.addEventListener("click", (e) => {
+    if (e.target.closest(".fav-btn")) return;
+    openGame(game);
+  });
+
+  card.querySelector(".fav-btn").addEventListener("click", (e) => {
+    e.stopPropagation();
+    toggleFavorite(game.id);
+    refreshCurrentPage();
+  });
+
+  return card;
+}
+
+function refreshCurrentPage() {
+  if (state.page === "home")      renderGameGrid();
+  if (state.page === "favorites") renderFavorites();
+  if (state.page === "recent")    renderRecent();
+}
+
+// ── Favorites ─────────────────────────────────────────────────────────────
+function toggleFavorite(id) {
+  const adding = !state.favorites.has(id);
+  adding ? state.favorites.add(id) : state.favorites.delete(id);
+  localStorage.setItem("cp_favorites", JSON.stringify([...state.favorites]));
+  if (state.currentGame?.id === id) updateModalFavBtn();
+  const game = GAMES.find((g) => g.id === id);
+  showToast(
+    adding ? `❤️ Added ${game?.title || "game"} to favorites` : `Removed from favorites`,
+    adding ? "success" : "info"
+  );
+}
+
+// ── Recently Played ───────────────────────────────────────────────────────
+function addToRecent(id) {
+  state.recent = [id, ...state.recent.filter((r) => r !== id)].slice(0, 12);
+  localStorage.setItem("cp_recent", JSON.stringify(state.recent));
+}
+
+function openGame(game) {
+  if (game.openDirect) {
+    window.open(game.url, "_blank", "noopener");
+    showToast(`🚀 Launching ${game.title} in standalone window`, "success");
+    addToRecent(game.id);
+    return;
+  }
+
+  state.currentGame = game;
+  state.relayIdx = 0;
+  modalTitle.textContent = game.title;
+  if (modalCourseBadge) modalCourseBadge.style.display = "none";
+  updateModalFavBtn();
+
+  // Show loader, hide error
+  iframeLoader.classList.remove("hidden");
+  iframeError.classList.add("hidden");
+  if (loaderMsg) loaderMsg.textContent = `Loading ${game.title}… Please wait a moment`;
+
+  gameModal.classList.remove("hidden");
+  document.body.style.overflow = "hidden";
+  addToRecent(game.id);
+
+  // Directly assign the game URL
+  gameFrame.src = game.url;
+
+  clearTimeout(state.loadTimer);
+  state.loadTimer = setTimeout(() => {
+    iframeLoader.classList.add("hidden");
+    try { gameFrame.focus(); } catch(e) {}
+  }, 3000);
+}
+
+function tryRelay() {
+  if (!state.currentGame) return;
+  if (state.relayIdx >= RELAY_BACKENDS.length) {
+    iframeLoader.classList.add("hidden");
+    iframeError.innerHTML = `
+      <i class="fa-solid fa-triangle-exclamation"></i>
+      <p>This activity couldn't be loaded through any relay.<br>
+      Try opening it directly in a new tab.</p>
+      <button onclick="window.open('${state.currentGame.url}','_blank')" class="btn btn-primary" style="margin-top:.75rem">
+        Open directly <i class="fa-solid fa-arrow-up-right-from-square"></i>
+      </button>
+    `;
+    iframeError.classList.remove("hidden");
+    return;
+  }
+
+  iframeLoader.classList.remove("hidden");
+  iframeError.classList.add("hidden");
+  if (loaderMsg) loaderMsg.textContent = `Trying relay ${state.relayIdx + 1}…`;
+
+  const proxied = RELAY_BACKENDS[state.relayIdx](state.currentGame.url);
+  state.relayIdx++;
+  gameFrame.src = proxied;
+
+  clearTimeout(state.loadTimer);
+  state.loadTimer = setTimeout(() => {
+    iframeLoader.classList.add("hidden");
+    try { gameFrame.focus(); } catch(e) {}
+  }, 4000);
+}
+
+// Hide loader when iframe fires load event
+gameFrame.addEventListener("load", () => {
+  if (gameFrame.src && gameFrame.src !== "about:blank") {
+    clearTimeout(state.loadTimer);
+    iframeLoader.classList.add("hidden");
+    iframeError.classList.add("hidden");
+    setTimeout(() => {
+      try { gameFrame.focus(); } catch(e) {}
+    }, 150);
+  }
+});
+
+function closeGame() {
+  clearTimeout(state.loadTimer);
+  gameModal.classList.add("hidden");
+  gameFrame.src = "about:blank";
+  iframeLoader.classList.remove("hidden");
+  iframeError.classList.add("hidden");
+  state.currentGame = null;
+  document.body.style.overflow = "";
+}
+
+function updateModalFavBtn() {
+  if (!state.currentGame) return;
+  const isFav = state.favorites.has(state.currentGame.id);
+  modalFav.innerHTML = `<i class="fa-${isFav ? "solid" : "regular"} fa-heart"
+    style="color:${isFav ? "var(--danger)" : ""}"></i>`;
+  modalFav.title = isFav ? "Remove from favorites" : "Add to favorites";
+}
+
+// Modal button wiring
+$("#modalClose")?.addEventListener("click", closeGame);
+$("#modalOverlay")?.addEventListener("click", closeGame);
+
+modalFav?.addEventListener("click", () => {
+  if (!state.currentGame) return;
+  toggleFavorite(state.currentGame.id);
+  refreshCurrentPage();
+});
+
+$("#modalFullscreen")?.addEventListener("click", () => {
+  if (gameFrame.requestFullscreen) gameFrame.requestFullscreen();
+  else if (gameFrame.webkitRequestFullscreen) gameFrame.webkitRequestFullscreen();
+});
+
+$("#modalNewTab")?.addEventListener("click", () => {
+  if (state.currentGame) window.open(state.currentGame.url, "_blank", "noopener");
+});
+
+// ── Random Game ───────────────────────────────────────────────────────────
+function pickRandom() {
+  const pool = state.category === "all"
+    ? GAMES
+    : GAMES.filter((g) => g.category === state.category);
+  if (!pool.length) return;
+  const game = pool[Math.floor(Math.random() * pool.length)];
+  openGame(game);
+  showToast(`🎲 Random: ${game.title}`, "info");
+}
+randomGameBtn?.addEventListener("click", pickRandom);
+heroRandom?.addEventListener("click", pickRandom);
+
+// ── Search ────────────────────────────────────────────────────────────────
+searchInput?.addEventListener("input", (e) => {
+  state.search = e.target.value.trim();
+  if (state.page !== "home") switchToHome();
+  renderGameGrid();
+  updateCount();
+});
+
+// ── Toast ─────────────────────────────────────────────────────────────────
+function showToast(message, type = "info") {
+  const icons = {
+    success: "fa-circle-check",
+    info:    "fa-circle-info",
+    warning: "fa-triangle-exclamation",
+    error:   "fa-circle-xmark",
+  };
+  const t = document.createElement("div");
+  t.className = `toast ${type}`;
+  t.innerHTML = `<i class="fa-solid ${icons[type] || icons.info}"></i><span>${message}</span>`;
+  toastContainer.appendChild(t);
+  setTimeout(() => t.remove(), 2700);
+}
+
+// ── Init ──────────────────────────────────────────────────────────────────
+buildFilterTags();
+syncSectionTitle();
+renderGameGrid();
+updateCount();
+navigateTo("home");
+
+</script>
 </body>
 </html>
